@@ -37,6 +37,10 @@ public class Dijkstra {
             }
         }
 
+        printShortestPath();
+    }
+
+    private void printShortestPath() {
         System.out.println("Shortest path length: " + dist.get(end));
         Stack<Character> stack = new Stack<>();
         Character current = end;
