@@ -15,7 +15,11 @@ public class Main {
     private static final char END = 'B';
 
     public static void main(String[] args) throws IOException {
-        String fileName = "/Users/oliviachisman/dev/depaul/csc_421/dijkstras-algorithm/Case3.txt";
+        if (args.length < 1) {
+            System.out.println("ERROR: Please specify the test case file location in program arguments");
+            return;
+        }
+        String fileName = args[0];
 
         BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)));
 
@@ -34,8 +38,6 @@ public class Main {
             String[] words = line.split(" ");
             graph.get(words[0].charAt(0)).add(new Node(words[1].charAt(0), Integer.valueOf(words[2])));
         }
-
-        System.out.println(graph);
 
         new Dijkstra(graph, START, END).findShortestPath();
     }

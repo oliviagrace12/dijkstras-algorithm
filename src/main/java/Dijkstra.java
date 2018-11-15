@@ -56,6 +56,7 @@ public class Dijkstra {
             stack.push(current);
         }
 
+        System.out.print("Shortest path sequence: ");
         while (!stack.empty()) {
             System.out.print(stack.pop() + " ");
         }
@@ -71,7 +72,6 @@ public class Dijkstra {
                 return n.getValue();
             }
         }
-
         return 0;
     }
 
