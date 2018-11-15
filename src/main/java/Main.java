@@ -11,19 +11,20 @@ import java.util.Map;
  */
 public class Main {
 
+    private static final char START = 'A';
+    private static final char END = 'B';
+
     public static void main(String[] args) throws IOException {
-        String fileName = "/Users/oliviachisman/dev/depaul/csc_421/dijkstras-algorithm/Case1.txt";
+        String fileName = "/Users/oliviachisman/dev/depaul/csc_421/dijkstras-algorithm/Case3.txt";
 
         BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)));
 
         int numVertices = Integer.valueOf(reader.readLine());
-        char c = 'A';
+        char c = START;
         Map<Character, List<Node>> graph = new HashMap<>();
 
-        char last = 'A';
         for (int i = 0; i < numVertices; i++) {
             graph.put(c, new ArrayList<>());
-            last = c;
             c++;
         }
 
@@ -36,6 +37,6 @@ public class Main {
 
         System.out.println(graph);
 
-        new Dijkstra(graph, 'A', last).findShortestPath();
+        new Dijkstra(graph, START, END).findShortestPath();
     }
 }

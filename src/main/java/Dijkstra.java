@@ -14,6 +14,7 @@ public class Dijkstra {
     private Map<Character, Integer> dist = new HashMap<>();
     private Map<Character, Character> childToParent = new HashMap<>();
     private PriorityQueue<Node> heap = new PriorityQueue<>();
+    private List<Character> inHeap = new ArrayList<>();
 
 
     public Dijkstra(Map<Character, List<Node>> graph, Character start, Character end) {
@@ -27,17 +28,23 @@ public class Dijkstra {
 
         while (!heap.isEmpty()) {
             Node u = heap.poll();
+            inHeap.remove(u.getC());
             for (Node w : graph.get(u.getC())) {
                 int newDist = dist(u) + getWeightBetween(u, w);
-                if (heap.contains(w) && dist(w) > newDist) {
+                if (inHeap.contains(w.getC()) && dist(w) > newDist) {
                     dist.put(w.getC(), newDist);
                     childToParent.put(w.getC(), u.getC());
-                    heap.remove(w);
+                    decreaseKey(w, newDist);
                 }
             }
         }
 
         printShortestPath();
+    }
+
+    private void decreaseKey(Node w, int newDist) {
+        heap.remove(w);
+        heap.add(new Node(w.getC(), newDist));
     }
 
     private void printShortestPath() {
@@ -77,6 +84,7 @@ public class Dijkstra {
                 dist.put(c, Integer.MAX_VALUE);
                 heap.add(new Node(c, Integer.MAX_VALUE));
             }
+            inHeap.add(c);
         }
     }
 
